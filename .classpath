@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="com.experitest.SEETEST_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/jhih_chen/Desktop/Eclipse_Jee/Appium_Studio_Auto_Testing_iOS/lib/commons-collections4-4.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/jhih_chen/Desktop/Eclipse_Jee/Appium_Studio_Auto_Testing_iOS/lib/poi-3.16.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/jhih_chen/Desktop/Eclipse_Jee/Appium_Studio_Auto_Testing_iOS/lib/poi-examples-3.16.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/jhih_chen/Desktop/Eclipse_Jee/Appium_Studio_Auto_Testing_iOS/lib/poi-excelant-3.16.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/jhih_chen/Desktop/Eclipse_Jee/Appium_Studio_Auto_Testing_iOS/lib/poi-ooxml-3.16.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/jhih_chen/Desktop/Eclipse_Jee/Appium_Studio_Auto_Testing_iOS/lib/poi-ooxml-schemas-3.16.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/jhih_chen/Desktop/Eclipse_Jee/Appium_Studio_Auto_Testing_iOS/lib/poi-scratchpad-3.16.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/jhih_chen/Desktop/Eclipse_Jee/Appium_Studio_Auto_Testing_iOS/lib/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
