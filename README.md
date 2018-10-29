@@ -126,12 +126,6 @@
 
 ![image](https://github.com/Gilleschen/Web_Auto_Testing/blob/master/picture/TestResult.PNG)
 
-#### log紀錄
-
-1. 針對Error之測試案例，進行log的紀錄
-
-2. 存放於C:\TUTK_QA_TestTool\TestReport\\[APP bundle ID]\\[Case Name]\\[Device UDID]\\log
-
 #### 腳本產生器說明
 
 點擊增益集中腳本產生器，如下圖：
