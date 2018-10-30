@@ -19,7 +19,7 @@
 
 ![image](https://github.com/Gilleschen/Appium_Studio_iOS/blob/master/img/APPandDevices.PNG)
 
-6. 建立腳本：新增一工作表，工作表名稱須以_TestScript為結尾 (e.g. Login_TestScript)，目前支援指令如下: (大小寫有分，使用方式請參考TestScript.xlsm內說明工作表)
+6. 建立腳本：新增一工作表，工作表名稱須以_TestScript為結尾 (e.g. Login_TestScript)，目前支援指令如下: (大小寫有分，使用方式請參考TestScript_iOS.xlsm內說明工作表)
 
           CaseName=>測試案列名稱(各案列開始時第一個填寫項目，必填!!!)
 
@@ -112,6 +112,7 @@
 1. 啟動Appium Studio並設定iOS裝置 (請參考https://docs.experitest.com/display/TD/Appium+Studio)
 
 2. 確認iOS裝置為Ready狀態，如下圖：
+
 ![image](https://github.com/Gilleschen/Appium_Studio_iOS/blob/master/img/device_setting.png)
 
 #### Excel 測試報告
