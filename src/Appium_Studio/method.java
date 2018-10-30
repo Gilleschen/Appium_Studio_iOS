@@ -36,6 +36,7 @@ import com.google.common.base.Stopwatch;
 import io.appium.java_client.TouchAction;
 
 import io.appium.java_client.android.AndroidKeyCode;
+import io.appium.java_client.android.Connection;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
@@ -280,6 +281,14 @@ public class method {
 					CurrentCaseStep = CurrentCaseStep + 1;
 					break;
 
+//				case "ByXpath_Swipe_FindText_Click_iOS":
+//					methodName = "ByXpath_Swipe_FindText_Click_iOS";
+//					appElemnt = TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 1);
+//					scroll = TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 2);
+//					appInput = TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 3);
+//					CurrentCaseStep = CurrentCaseStep + 3;
+//					break;
+
 				case "Back":
 					methodName = "Back";
 					break;
@@ -425,7 +434,8 @@ public class method {
 		}
 		System.err.println(" " + reportDate);
 		String FilePath = MakeErrorFolder(Integer.parseInt(String.valueOf(elements[elements.length - 1])));// 建立各案例之行動裝置資料夾存放log資訊及Screenshot資訊
-		//logcat(FilePath, Integer.parseInt(String.valueOf(elements[elements.length - 1])));// 收集log
+		// logcat(FilePath, Integer.parseInt(String.valueOf(elements[elements.length -
+		// 1])));// 收集log
 		ErrorScreenShot(FilePath, Integer.parseInt(String.valueOf(elements[elements.length - 1])));// Screenshot
 																									// Error畫面
 		ErrorList[Integer.parseInt(String.valueOf(elements[elements.length - 1]))] = "Error";// 儲存第i台設備command失敗結果
@@ -435,29 +445,29 @@ public class method {
 		CurrentErrorDevice++;// 統計出錯的設備數
 	}
 
-	public static void logcat(String FilePath, int DeviceNum) throws IOException {
-		// 收集log
-		// System.out.println(
-		// "[info] Executing:|Saving device log...|" +
-		// TestCase.DeviceInformation.deviceName.get(DeviceNum) + "|");
-		DateFormat df = new SimpleDateFormat("yyyy_MM_dd_HH-mm-ss");
-		Date today = Calendar.getInstance().getTime();
-		String reportDate = df.format(today);
-		List<LogEntry> logEntries = driver.get(DeviceNum).manage().logs().get("logcat").filter(Level.ALL);
-		try {
-			FileWriter fw = new FileWriter(FilePath + reportDate + "_log" + ".txt");
-			for (int i = 0; i < logEntries.size(); i++) {
-				fw.write(logEntries.get(i).toString() + "\n");
-			}
-			fw.flush();
-			fw.close();
-			System.out.println("[info] Executing:|Saving device log - Done.|"
-					+ TestCase.DeviceInformation.deviceName.get(DeviceNum) + "|");
-		} catch (Exception e) {
-			System.err.println("[Error] Executing:|Fail to save device log.|"
-					+ TestCase.DeviceInformation.deviceName.get(DeviceNum) + "|");
-		}
-	}
+//	public static void logcat(String FilePath, int DeviceNum) throws IOException {
+//		// 收集log
+//		// System.out.println(
+//		// "[info] Executing:|Saving device log...|" +
+//		// TestCase.DeviceInformation.deviceName.get(DeviceNum) + "|");
+//		DateFormat df = new SimpleDateFormat("yyyy_MM_dd_HH-mm-ss");
+//		Date today = Calendar.getInstance().getTime();
+//		String reportDate = df.format(today);
+//		List<LogEntry> logEntries = driver.get(DeviceNum).manage().logs().get("logcat").filter(Level.ALL);
+//		try {
+//			FileWriter fw = new FileWriter(FilePath + reportDate + "_log" + ".txt");
+//			for (int i = 0; i < logEntries.size(); i++) {
+//				fw.write(logEntries.get(i).toString() + "\n");
+//			}
+//			fw.flush();
+//			fw.close();
+//			System.out.println("[info] Executing:|Saving device log - Done.|"
+//					+ TestCase.DeviceInformation.deviceName.get(DeviceNum) + "|");
+//		} catch (Exception e) {
+//			System.err.println("[Error] Executing:|Fail to save device log.|"
+//					+ TestCase.DeviceInformation.deviceName.get(DeviceNum) + "|");
+//		}
+//	}
 
 	public static void ErrorScreenShot(String FilePath, int DeviceNum) {
 		try {
@@ -515,42 +525,6 @@ public class method {
 
 	}
 
-//	public void Byid_VerifyText() throws IOException {
-//		boolean result[] = new boolean[driver.size()];// 未給定Boolean值，預設為False
-//		boolean ErrorResult[] = new boolean[driver.size()];
-//
-//		for (int i = 0; i < driver.size(); i++) {
-//			if (driver.get(i) != null) {
-//				try {
-//					System.out.println("[info] Executing:|Byid_VerifyText|" + appElemnt + "|"
-//							+ TestCase.DeviceInformation.deviceName.get(i) + "|");
-//					wait[i] = new WebDriverWait(driver.get(i), command_timeout);
-//					element[i] = wait[i].until(ExpectedConditions.visibilityOfElementLocated(
-//							By.id(TestCase.DeviceInformation.appPackage + ":id/" + appElemnt))).getText();
-//				} catch (Exception e) {
-//					ErrorCheck(appElemnt, i);
-//				}
-//
-//				if (element[i].equals("ERROR")) {
-//					ErrorResult[i] = true;
-//
-//				} else {
-//					// 回傳測試案例清單的名稱給ExpectResult.LoadExpectResult，並存放期望結果至ResultList清單
-//					ExpectResult.LoadExpectResult(TestCase.CaseList.get(CurrentCaseNumber).toString());
-//					for (int j = 0; j < ExpectResult.ResultList.size(); j++) {
-//						if (element[i].equals(ExpectResult.ResultList.get(j)) == true) {
-//							result[i] = true;
-//							break;
-//						} else {
-//							result[i] = false;
-//						}
-//					}
-//				}
-//			}
-//		}
-//		SubMethod_Result(ErrorResult, result);// 呼叫submethod_result儲存測試結果於Excel
-//
-//	}
 
 	public void ByXpath_VerifyText() throws IOException {
 		boolean result[] = new boolean[driver.size()];// 未給定Boolean值，預設為False
@@ -593,25 +567,6 @@ public class method {
 
 	}
 
-//	public void Byid_Wait() throws IOException {
-//
-//		for (int i = 0; i < driver.size(); i++) {
-//			if (driver.get(i) != null) {
-//				try {
-//					System.out.println("[info] Executing:|Byid_Wait|" + appElemnt + "|"
-//							+ TestCase.DeviceInformation.deviceName.get(i) + "|");
-//					wait[i] = new WebDriverWait(driver.get(i), command_timeout);
-//					wait[i].until(ExpectedConditions.presenceOfElementLocated(
-//							By.id(TestCase.DeviceInformation.appPackage + ":id/" + appElemnt)));
-//					ErrorList[i] = "Pass";
-//					CaseErrorList[CurrentCaseNumber] = ErrorList;
-//				} catch (Exception e) {
-//					ErrorCheck(appElemnt, i);
-//				}
-//			}
-//		}
-//	}
-
 	public void ByXpath_Wait() throws IOException {
 
 		for (int i = 0; i < driver.size(); i++) {
@@ -629,28 +584,6 @@ public class method {
 			}
 		}
 	}
-
-//	public void Byid_SendKey() throws IOException {
-//		for (int i = 0; i < driver.size(); i++) {
-//			if (driver.get(i) != null) {
-//				try {
-//					System.out.println("[info] Executing:|Byid_SendKey|" + appElemnt + "|" + appInput + "|"
-//							+ TestCase.DeviceInformation.deviceName.get(i) + "|");
-//					wait[i] = new WebDriverWait(driver.get(i), command_timeout);
-//					// wait[i].until(ExpectedConditions.visibilityOfElementLocated(
-//					// By.id(TestCase.DeviceInformation.appPackage + ":id/" +
-//					// appElemnt))).clear();
-//					wait[i].until(ExpectedConditions.visibilityOfElementLocated(
-//							By.id(TestCase.DeviceInformation.appPackage + ":id/" + appElemnt))).sendKeys(appInput);
-//					ErrorList[i] = "Pass";
-//					CaseErrorList[CurrentCaseNumber] = ErrorList;
-//					HideKeyboard();
-//				} catch (Exception e) {
-//					ErrorCheck(appElemnt, i);
-//				}
-//			}
-//		}
-//	}
 
 	public void ByXpath_SendKey() throws IOException {
 		for (int i = 0; i < driver.size(); i++) {
@@ -672,28 +605,6 @@ public class method {
 		}
 	}
 
-//	public void Byid_Click() throws IOException {
-//		for (int i = 0; i < driver.size(); i++) {
-//			if (driver.get(i) != null) {
-//
-//				try {
-//					System.out.println("[info] Executing:|Byid_Click|" + appElemnt + "|"
-//							+ TestCase.DeviceInformation.deviceName.get(i) + "|");
-//					wait[i] = new WebDriverWait(driver.get(i), command_timeout);
-//					wait[i].until(ExpectedConditions.visibilityOfElementLocated(
-//							By.id(TestCase.DeviceInformation.appPackage + ":id/" + appElemnt))).click();
-//					ErrorList[i] = "Pass";// 儲存第i台設備command結果，成功執行Click則，存入Pass||舉例
-//											// 迭代1：ErrorList=[Pass];迭代2：ErrorList=[Pass,Pass]
-//					CaseErrorList[CurrentCaseNumber] = ErrorList;// 儲存第i台設備執行第CurrentCaseNumber個案例之command結果||舉例
-//																	// 迭代1：CaseErrorList=[[Pass]];迭代2：CaseErrorList=[[Pass,Pass]]
-//				} catch (Exception e) {
-//					ErrorCheck(appElemnt, i);
-//				}
-//			}
-//		}
-//
-//	}
-
 	public void ByXpath_Click() throws IOException {
 		for (int i = 0; i < driver.size(); i++) {
 			if (driver.get(i) != null) {
@@ -710,27 +621,6 @@ public class method {
 			}
 		}
 	}
-
-//	public void Byid_Clear() throws IOException {
-//
-//		for (int i = 0; i < driver.size(); i++) {
-//			if (driver.get(i) != null) {
-//				try {
-//					System.out.println("[info] Executing:|Byid_Clear|" + appElemnt + "|Clear|"
-//							+ TestCase.DeviceInformation.deviceName.get(i) + "|");
-//					wait[i] = new WebDriverWait(driver.get(i), command_timeout);
-//					wait[i].until(ExpectedConditions.visibilityOfElementLocated(
-//							By.id(TestCase.DeviceInformation.appPackage + ":id/" + appElemnt))).clear();
-//					ErrorList[i] = "Pass";
-//					CaseErrorList[CurrentCaseNumber] = ErrorList;
-//					HideKeyboard();
-//				} catch (Exception e) {
-//					ErrorCheck(appElemnt, i);
-//				}
-//			}
-//		}
-//
-//	}
 
 	public void ByXpath_Clear() throws IOException {
 
@@ -969,8 +859,6 @@ public class method {
 				IOSDriver = new IOSDriver<>(new URL("http://127.0.0.1:" + port + "/wd/hub"), cap[i]);
 				driverBK.add(IOSDriver);
 				driver.add(IOSDriver);
-//				ErrorList[i] = "Pass";
-//				CaseErrorList[CurrentCaseNumber] = ErrorList;
 			} catch (Exception e) {
 				ErrorCheck("CeateAppiumSession", i);
 			}
@@ -997,19 +885,6 @@ public class method {
 		}
 
 	}
-
-//	public void Back() throws IOException {
-//		for (int i = 0; i < driver.size(); i++) {
-//			if (driver.get(i) != null) {
-//				try {
-//					System.out.println("[info] Executing:|Back|" + TestCase.DeviceInformation.deviceName.get(i) + "|");
-//					driver.get(i).pressKeyCode(AndroidKeyCode.BACK);
-//				} catch (Exception e) {
-//					ErrorCheck("Back", i);
-//				}
-//			}
-//		}
-//	}
 
 	public void Home() throws IOException {
 		for (int i = 0; i < driver.size(); i++) {
@@ -1060,77 +935,6 @@ public class method {
 		}
 	}
 
-	// public void WiFi() throws IOException {
-	//
-	// for (int i = 0; i < driver.size(); i++) {
-	// if (driver.get(i) != null) {
-
-	// try {
-	// System.out.println("[info] Executing:|WiFi|" + switchWiFi + "|"
-	// + TestCase.DeviceInformation.deviceName.get(i) + "|");
-	// //
-	// if邏輯說明:(目的避免已開啟wifi或已關閉wif了，又再次執行令啟動wifi或關閉wif(皆去除if判斷僅跑switch流程)，如此可節省測試時間)
-	// // [判斷手機連線狀態為WiFi off及data off(皆NONE) &&
-	// // Excel指令為On時，才執行switch之Case"On"]
-	// // ||[[判斷手機連線狀態為WiFi on || WiFi及Data都啟動(皆ALL)] &&
-	// // Excel指令為Off時，才執行switch之Case"Off"]
-	//
-	// if ((driver.get(i).getConnection().toString().equals("NONE") &&
-	// switchWiFi.equals("On"))
-	// || ((driver.get(i).getConnection().toString().equals("ALL")
-	// || driver.get(i).getConnection().toString().equals("WIFI"))
-	// && switchWiFi.equals("Off"))) {
-	// switch (switchWiFi) {
-	// case "On":
-	//
-	// // Appium 6.1.0 API 有問題!!!!
-	// driver.get(i).setConnection(Connection.WIFI);
-	// break;
-	// case "Off":
-	// // Appium 6.1.0 API 有問題!!!!
-	// driver.get(i).setConnection(Connection.NONE);
-	// break;
-	// }
-	// }
-	// } catch (Exception e) {
-	// switch (switchWiFi) {
-	// case "On":
-	// ErrorCheck("On", i);
-	// break;
-	// case "Off":
-	// ErrorCheck("Off", i);
-	// break;
-	// }
-	// }
-	// }
-	// }
-	//
-	// }
-
-//	public void Byid_invisibility() throws IOException {
-//		for (int i = 0; i < driver.size(); i++) {
-//
-//			if (driver.get(i) != null) {
-//
-//				try {
-//					System.out.println("[info] Executing:|Byid_invisibility|" + appElemnt + "|");
-//
-//					wait[i] = new WebDriverWait(driver.get(i), command_timeout);
-//					wait[i].until(ExpectedConditions.invisibilityOfElementLocated(
-//							By.id(TestCase.DeviceInformation.appPackage + ":id/" + appElemnt)));
-//					ErrorList[i] = "Pass";// 儲存第i台設備command結果，成功執行Click則，存入Pass||舉例
-//											// 迭代1：ErrorList=[Pass];迭代2：ErrorList=[Pass,Pass]
-//					CaseErrorList[CurrentCaseNumber] = ErrorList;// 儲存第i台設備執行第CurrentCaseNumber個案例之command結果||舉例
-//																	// 迭代1：CaseErrorList=[[Pass]];迭代2：CaseErrorList=[[Pass,Pass]]
-//				} catch (Exception e) {
-//
-//					ErrorCheck(appElemnt, i);
-//
-//				}
-//			}
-//		}
-//	}
-
 	public void ByXpath_invisibility() throws IOException {
 		for (int i = 0; i < driver.size(); i++) {
 
@@ -1151,31 +955,6 @@ public class method {
 		}
 	}
 
-//	public void Byid_LongPress() throws IOException {
-//		for (int i = 0; i < driver.size(); i++) {
-//			if (driver.get(i) != null) {
-//
-//				try {
-//					System.out.println("[info] Executing:|Byid_LongPress|" + appElemnt + "|");
-//					TouchAction t = new TouchAction(driver.get(i));
-//					wait[i] = new WebDriverWait(driver.get(i), command_timeout);
-//
-//					t.longPress(wait[i].until(ExpectedConditions.visibilityOfElementLocated(
-//							By.id(TestCase.DeviceInformation.appPackage + ":id/" + appElemnt)))).perform();
-//
-//					ErrorList[i] = "Pass";// 儲存第i台設備command結果，成功執行Click則，存入Pass||舉例
-//											// 迭代1：ErrorList=[Pass];迭代2：ErrorList=[Pass,Pass]
-//					CaseErrorList[CurrentCaseNumber] = ErrorList;// 儲存第i台設備執行第CurrentCaseNumber個案例之command結果||舉例
-//																	// 迭代1：CaseErrorList=[[Pass]];迭代2：CaseErrorList=[[Pass,Pass]]
-//				} catch (Exception e) {
-//					ErrorCheck(appElemnt, i);
-//				}
-//			}
-//
-//		}
-//
-//	}
-
 	public void ByXpath_LongPress() throws IOException {
 		for (int i = 0; i < driver.size(); i++) {
 			if (driver.get(i) != null) {
@@ -1195,9 +974,7 @@ public class method {
 					ErrorCheck(appElemnt, i);
 				}
 			}
-
 		}
-
 	}
 
 	public void ByXpath_Swipe() throws IOException {
@@ -1223,34 +1000,6 @@ public class method {
 			}
 		}
 	}
-
-//	public void Byid_Swipe() throws IOException {
-//		// Point p1, p2;// p1 為起點;p2為終點
-//
-//		for (int i = 0; i < driver.size(); i++) {
-//			if (driver.get(i) != null) {
-//				try {
-//					System.out.println("[info] Executing:|Byid_Swipe|" + appElemnt + "|" + toElemnt + "|");
-//
-//					wait[i] = new WebDriverWait(driver.get(i), command_timeout);
-//					TouchAction t = new TouchAction(driver.get(i));
-//					WebElement ele2 = wait[i].until(ExpectedConditions.visibilityOfElementLocated(
-//							By.id(TestCase.DeviceInformation.appPackage + ":id/" + toElemnt)));
-//					WebElement ele1 = wait[i].until(ExpectedConditions.visibilityOfElementLocated(
-//							By.id(TestCase.DeviceInformation.appPackage + ":id/" + appElemnt)));
-//					t.press(ele1.getLocation().x, ele1.getLocation().y).waitAction((1000))
-//							.moveTo(ele2.getLocation().x, ele2.getLocation().y).release().perform();
-//
-//					// t.press(ele1).waitAction(WaitOptions.waitOptions(ofSeconds(1))).moveTo(ele2).release().perform();
-//
-//					ErrorList[i] = "Pass";
-//					CaseErrorList[CurrentCaseNumber] = ErrorList;
-//				} catch (Exception e) {
-//					ErrorCheck(toElemnt, appElemnt, i);
-//				}
-//			}
-//		}
-//	}
 
 	public void Swipe() throws IOException {
 		for (int i = 0; i < driver.size(); i++) {
@@ -1346,158 +1095,6 @@ public class method {
 			}
 
 		}
-	}
-
-	// ByXpath_Swipe_FindText_Click_Android缺點：1.搜尋的字串不可重複 2.搜尋5次都沒找到元件，則停止搜尋
-	public void ByXpath_Swipe_FindText_Click_Android() throws IOException {
-
-		for (int j = 0; j < driver.size(); j++) {
-			if (driver.get(j) != null) {
-				int SearchNumber = 0;// 搜尋次數
-				Point ScrollBarP;// 卷軸元件座標
-				Dimension ScrollBarS;// 卷軸元件之長及寬
-				WebElement ScrollBar;// 卷軸元件
-
-				try {
-					System.out.println("[info] Executing:|ByXpath_Swipe_FindText_Click_Android|" + appElemnt + "|"
-							+ scroll + "|" + appElemntarray + "|" + appInput + "|" + appInputXpath + "|");
-					wait[j] = new WebDriverWait(driver.get(j), command_timeout);
-					TouchAction t = new TouchAction(driver.get(j));
-					ScrollBar = wait[j].until(ExpectedConditions.visibilityOfElementLocated(By.xpath(appElemnt)));// 卷軸元件
-					ScrollBarS = ScrollBar.getSize();// 卷軸元件的長及寬
-					ScrollBarP = ScrollBar.getLocation();// 卷軸的座標
-					int errorX = (int) Math.round(ScrollBarS.width * 0.1);
-					int errorY = (int) Math.round(ScrollBarS.height * 0.1);
-					List<WebElement> targetlist = wait[j]
-							.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(appElemntarray)));// 要搜尋的多筆類似元件清單
-
-					for (int i = 0; i < targetlist.size(); i++) {
-
-						if ((targetlist.get(i).getText().toString()).equals(appInput)) {// 若targetelement在targetlist清單中，則點擊targetelement
-							WebElement targetElement;// 準備搜尋的元件
-							Point targetElementP;// 準備搜尋的元件之座標
-							Dimension targetElementS;// 準備搜尋的元件之長及寬
-
-							targetElement = wait[j]
-									.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(appInputXpath)));
-
-							targetElementP = targetElement.getLocation();// 準備搜尋元件的座標
-							targetElementS = targetElement.getSize();// 準備搜尋元件的長及寬
-
-							switch (scroll.toString()) {
-
-							case "DOWN":
-								if (targetElementP.y > ScrollBarP.y + ScrollBarS.height) {// 若搜尋元件的y座標大於卷軸範圍，表示搜尋元件全部UI被卷軸遮住
-
-									t.press(targetElementP.x, ScrollBarS.height + ScrollBarP.y - errorY)
-											.waitAction(1000).moveTo(targetElementP.x, ScrollBarP.y + errorY).release()
-											.perform();
-
-								} else if (targetElementP.y + targetElementS.height == ScrollBarP.y
-										+ ScrollBarS.height) {// 若搜尋元件的y座標與寬度總和等於卷軸長度，表示搜尋元件的部分UI被卷軸遮住
-									t.press(targetElementP.x - errorY, targetElementP.y).waitAction(1000)
-											.moveTo(targetElementP.x, ScrollBarP.y + errorY).release().perform();
-
-								}
-								break;
-
-							case "UP":
-								if (targetElementP.y + targetElementS.height < ScrollBarP.y) {// 若搜尋元件的最大y座標小於卷軸y座標，表示搜尋元件全部UI被卷軸遮住
-									t.press(targetElementP.x, ScrollBarP.y + errorY).waitAction(1000)
-											.moveTo(targetElementP.x, ScrollBarS.height + ScrollBarP.y - errorY)
-											.release().perform();
-
-								} else {// 反之，若搜尋元件的最大y座標大於卷軸y座標，表示搜尋元件全部UI被卷軸遮住
-									t.press(targetElementP.x, ScrollBarP.y + errorY).waitAction(1000)
-											.moveTo(targetElementP.x, ScrollBarP.y + ScrollBarS.height - errorY)
-											.release().perform();
-								}
-								break;
-
-							case "LEFT":// 畫面向左捲動(觀看畫面右方內容)
-								if (targetElementP.x > ScrollBarP.x + ScrollBarS.width) {// 若搜尋元件的x座標大於卷軸範圍，表示搜尋元件全部UI被卷軸遮住
-									t.press(ScrollBarP.x + ScrollBarS.width - errorX, targetElementP.y).waitAction(1000)
-											.moveTo(ScrollBarP.x + errorX, targetElementP.y).release().perform();
-
-								} else if (targetElementP.x + targetElementS.width == ScrollBarP.x + ScrollBarS.width) {// 若搜尋元件的x座標與寬度總和等於卷軸寬度，表示搜尋元件的部分UI被卷軸遮住
-									t.press(targetElementP.x - errorX, targetElementP.y).waitAction(1000)
-											.moveTo(ScrollBarP.x + errorX, targetElementP.y).release().perform();
-								}
-								break;
-
-							case "RIGHT":// 畫面向右捲動(觀看畫面左方內容)
-								if (targetElementP.x + targetElementS.width < ScrollBarP.x) {// 若搜尋元件的最大x座標小於卷軸x座標，表示搜尋元件全部UI被卷軸遮住
-
-									t.press(ScrollBarP.x + errorX, targetElementP.y).waitAction(1000)
-											.moveTo(ScrollBarP.x + ScrollBarS.width - errorX, targetElementP.y)
-											.release().perform();
-								} else if (targetElementP.x == ScrollBarP.x) {// 若搜尋元件的x座標等於卷軸x座標，可能表示搜尋元件的部分UI被卷軸遮住
-									t.press(targetElementP.x + targetElementS.width + errorX, targetElementP.y)
-											.waitAction(1000)
-											.moveTo(ScrollBarP.x + ScrollBarS.width - errorX, targetElementP.y)
-											.release().perform();
-								}
-								break;
-							}
-
-							wait[j].until(ExpectedConditions.visibilityOfElementLocated(By.xpath(appInputXpath)))
-									.click();
-							break;
-						}
-
-						if (i == targetlist.size() - 1) {// 若targetlist中最後一筆資料比對完後，則進行Srcoll拖曳
-
-							switch (scroll.toString()) {
-
-							case "DOWN":
-								t.press(ScrollBarP.x + errorX, ScrollBarP.y + ScrollBarS.height - errorY)
-										.waitAction(1000).moveTo(ScrollBarP.x + errorX, ScrollBarP.y + errorY).release()
-										.perform();// 向下捲動
-								break;
-
-							case "UP":
-
-								t.press(ScrollBarP.x + errorX, ScrollBarP.y + errorY).waitAction(1000)
-										.moveTo(ScrollBarP.x + errorX, ScrollBarP.y + ScrollBarS.height - errorY)
-										.release().perform();// 向上捲動
-								break;
-
-							case "LEFT":
-								t.press(ScrollBarP.x + ScrollBarS.width - errorX, ScrollBarP.y + errorY)
-										.waitAction(1000).moveTo(ScrollBarP.x + errorX, ScrollBarP.y + errorY).release()
-										.perform();// 畫面向左捲動(觀看畫面右方內容)
-								break;
-
-							case "RIGHT":
-								t.press(ScrollBarP.x + errorX, ScrollBarP.y + errorY).waitAction(1000)
-										.moveTo(ScrollBarP.x + ScrollBarS.width - errorX, ScrollBarP.y + errorY)
-										.release().perform();// 畫面向右捲動(觀看畫面左方內容)
-								break;
-
-							}
-							SearchNumber++;// 累計搜尋次數
-							targetlist.clear();// 清除targetlist
-							targetlist = wait[j].until(
-									ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(appElemntarray)));// 再次取得新targetlist
-
-							if (SearchNumber == 10) {// 搜尋10次都沒找到元件，則跳出for
-								System.err.println("Can't find " + appInput);// 印出找不到
-								break;// 跳出for
-							} else {
-								i = -1;// 若SearchNumber!=10，則令i=-1(目的：再次執行for)
-							}
-						}
-					}
-					ErrorList[j] = "Pass";
-					CaseErrorList[CurrentCaseNumber] = ErrorList;
-				} catch (Exception w) {
-
-					ErrorCheck(appElemnt, appElemntarray, appInputXpath, j);
-
-				}
-			}
-		}
-
 	}
 
 	/*
