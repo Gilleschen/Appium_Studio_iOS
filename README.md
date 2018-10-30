@@ -111,7 +111,7 @@
 
 1. 啟動Appium Studio並設定iOS裝置 (請參考https://docs.experitest.com/display/TD/Appium+Studio)
 
-2. 確認iOS裝置Ready，如下圖：
+2. 確認iOS裝置為Ready狀態，如下圖：
 ![image](https://github.com/Gilleschen/Appium_Studio_iOS/blob/master/img/device_setting.png)
 
 #### Excel 測試報告
