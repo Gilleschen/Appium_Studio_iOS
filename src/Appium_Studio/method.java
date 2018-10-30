@@ -289,9 +289,9 @@ public class method {
 //					CurrentCaseStep = CurrentCaseStep + 3;
 //					break;
 
-				case "Back":
-					methodName = "Back";
-					break;
+//				case "Back":
+//					methodName = "Back";
+//					break;
 
 				case "Home":
 					methodName = "Home";
@@ -314,11 +314,11 @@ public class method {
 					checkVerifyText = TestCase.StepList.get(CurrentCase).get(CurrentCaseStep - 2).toString();
 					break;
 
-				case "WiFi":
-					methodName = "WiFi";
-					switchWiFi = TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 1);
-					CurrentCaseStep = CurrentCaseStep + 1;
-					break;
+//				case "WiFi":
+//					methodName = "WiFi";
+//					switchWiFi = TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 1);
+//					CurrentCaseStep = CurrentCaseStep + 1;
+//					break;
 
 				}
 
@@ -522,9 +522,7 @@ public class method {
 				}
 			}
 		}
-
 	}
-
 
 	public void ByXpath_VerifyText() throws IOException {
 		boolean result[] = new boolean[driver.size()];// 未給定Boolean值，預設為False
