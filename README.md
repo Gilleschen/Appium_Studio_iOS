@@ -151,4 +151,6 @@
 
 * *目前不支援WiFi指令*
 
+* *目前Swipe, ByXpath_Swipe, ByXpath_Swipe_Vertical, ByXpath_Swipe_Horizontal只能滑動一次 (設定iterative=1)*
+
 
