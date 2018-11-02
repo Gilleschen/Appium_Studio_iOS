@@ -88,7 +88,7 @@ public class method {
 		invokeFunction();
 		EndAppiumSession();// 中斷 Appium 通道
 		System.out.println("測試結束!!!" + "(" + totaltime + " s)");
-		Process proc = Runtime.getRuntime().exec("explorer C:\\TUTK_QA_TestTool\\TestReport");// 開啟TestReport資料夾
+		Runtime.getRuntime().exec("explorer C:\\TUTK_QA_TestTool\\TestReport");// 開啟TestReport資料夾
 
 	}
 
@@ -227,7 +227,7 @@ public class method {
 					starty = Integer.valueOf(TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 2));
 					endx = Integer.valueOf(TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 3));
 					endy = Integer.valueOf(TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 4));
-					iterative = Integer.valueOf(TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 5));
+					iterative = 1;// Integer.valueOf(TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 5));
 					CurrentCaseStep = CurrentCaseStep + 5;
 					break;
 
@@ -235,7 +235,7 @@ public class method {
 					methodName = "ByXpath_Swipe_Vertical";
 					appElemnt = TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 1);
 					scroll = TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 2);
-					iterative = Integer.valueOf(TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 3));
+					iterative = 1;// Integer.valueOf(TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 3));
 					CurrentCaseStep = CurrentCaseStep + 3;
 					break;
 
@@ -243,7 +243,7 @@ public class method {
 					methodName = "ByXpath_Swipe_Horizontal";
 					appElemnt = TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 1);
 					scroll = TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 2);
-					iterative = Integer.valueOf(TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 3));
+					iterative = 1;// Integer.valueOf(TestCase.StepList.get(CurrentCase).get(CurrentCaseStep + 3));
 					CurrentCaseStep = CurrentCaseStep + 3;
 					break;
 
@@ -1035,11 +1035,10 @@ public class method {
 					e = wait[i].until(ExpectedConditions.visibilityOfElementLocated(By.xpath(appElemnt)));
 					s = e.getSize();
 					p = e.getLocation();
-					int errorX = (int) Math.round(s.width * 0.01);
-					int errorY = (int) Math.round(s.height * 0.01);
+					int errorX = (int) Math.round(s.width * 0.05);
+					int errorY = (int) Math.round(s.height * 0.05);
 					for (int j = 0; j < iterative; j++) {
 						if (scroll.equals("DOWN")) {// 畫面向下捲動
-
 							t.press(p.x + errorX, p.y + s.height - errorY).waitAction(1000)
 									.moveTo(p.x + errorX, p.y + errorY).release().perform();
 
@@ -1072,8 +1071,8 @@ public class method {
 
 					s = e.getSize();
 					p = e.getLocation();
-					int errorX = (int) Math.round(s.getWidth() * 0.01);
-					int errorY = (int) Math.round(s.getHeight() * 0.01);
+					int errorX = (int) Math.round(s.getWidth() * 0.05);
+					int errorY = (int) Math.round(s.getHeight() * 0.05);
 					for (int j = 0; j < iterative; j++) {
 						if (scroll.equals("RIGHT")) {// 畫面向右捲動 (觀看畫面左方內容)
 
